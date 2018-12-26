@@ -104,7 +104,7 @@ public class ProfileController {
 		model.addAttribute("numberOfHelped", numberOfHelped);
 		model.addAttribute("myImgs", myImgs);
 		model.addAttribute("isHasMoreImg", myAllImgs.size()>myImgs.size());
-		model.addAttribute("switch", (user.getId()==otherUser.getId())?true:false);
+		model.addAttribute("switch", (user.getId().equals(otherUser.getId()))?true:false);
 		
 		return "profile";
 	}
