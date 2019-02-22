@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/online">
 <head>
-    <title>Answers | JF</title>
+    <title>回复</title>
 </head>
 <body>
     <main layout:fragment="content">
         <article class="container" style="padding: 3% 0 2%;">
             <header class="row">
                 <div class="col s12">
-                    <blockquote class="flow-text left" th:text="|Answers:|">Header</blockquote>
+                    <blockquote class="flow-text left" th:text="|回复：|">Header</blockquote>
                 </div>
             </header>
             <section class="row">
@@ -16,9 +16,9 @@
                     <table class="striped bordered centered" th:if="${answers.size() != 0}">
                         <thead>
                             <tr>
-                                <th>Topic</th>
-                                <th>Content</th>
-                                <th>Enter</th>
+                                <th>话题</th>
+                                <th>内容</th>
+                                <th>进入</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -40,7 +40,7 @@
             <section class="row">
                 <div class="col s12">
                     <div th:if="${answers.size() == 0}">
-                        <p class="flow-text center">No answers</p>
+                        <p class="flow-text center">目前还没有回复</p>
                     </div>
                 </div>
             </section>

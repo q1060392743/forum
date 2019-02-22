@@ -25,7 +25,7 @@ public class EventConsumer implements InitializingBean, ApplicationContextAware 
 	JedisAdapter jedisAdapter;
 
 	private static final Logger logger = LoggerFactory.getLogger(EventConsumer.class);
-	private Map<EventType, List<EventHandler>> config = new HashMap<EventType, List<EventHandler>>();
+	private Map<EventType, List<EventHandler>> config = new HashMap<>();
 	private ApplicationContext applicationContext;
 
 	@Override
@@ -39,40 +39,37 @@ public class EventConsumer implements InitializingBean, ApplicationContextAware 
 				// 把这个事件关联的事件加入
 				for (EventType type : eventTypes) {
 					if (!config.containsKey(type)) {
-						config.put(type, new ArrayList<EventHandler>());
+						config.put(type, new ArrayList<>());
 					}
 					config.get(type).add(entry.getValue());
 				}
 			}
 		}
 
-		Thread thread = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				// 一直不断地从队列中取数据
-				while (true) {
-					// 取数据
-					String key = RedisKeyUtil.getEventQueueKey();
-					// 把key对应的事件取出来
-					List<String> events = jedisAdapter.brpop(0, key);
-					// 遍历取出来的事件
-					for (String message : events) {
-						if (message.equals(key)) {
-							continue;
-						}
+		Thread thread = new Thread(() -> {
+			// 一直不断地从队列中取数据
+			while (true) {
+				// 取数据
+				String key = RedisKeyUtil.getEventQueueKey();
+				// 把key对应的事件取出来
+				List<String> events = jedisAdapter.brpop(0, key);
+				// 遍历取出来的事件
+				for (String message : events) {
+					if (message.equals(key)) {
+						continue;
+					}
 
-						// 将取出来的事件转换为EventModel
-						EventModel eventModel = JSON.parseObject(message, EventModel.class);
-						// 若为未注册过的事件，则抛掉
-						if (!config.containsKey(eventModel.getType())) {
-							logger.error("不能识别的事件");
-							continue;
-						}
+					// 将取出来的事件转换为EventModel
+					EventModel eventModel = JSON.parseObject(message, EventModel.class);
+					// 若为未注册过的事件，则抛掉
+					if (!config.containsKey(eventModel.getType())) {
+						logger.error("不能识别的事件");
+						continue;
+					}
 
-						// 找到handler去处理相应的事件
-						for (EventHandler handler : config.get(eventModel.getType())) {
-							handler.doHandle(eventModel);
-						}
+					// 找到handler去处理相应的事件
+					for (EventHandler handler : config.get(eventModel.getType())) {
+						handler.doHandle(eventModel);
 					}
 				}
 			}

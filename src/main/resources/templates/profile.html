@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/online">
 <head>
-    <title th:text="${otherUser.getUsername() + ' | JF'}">Title of profile view</title>
+    <title th:text="${otherUser.getUsername()}">Title of profile view</title>
 </head>
 <body>
     <main layout:fragment="content">
         <article class="container" style="padding: 3% 0 2%;">
             <header class="row">
                 <div class="col s12">
-                    <blockquote class="flow-text left" th:text="${otherUser.getUsername()} + |&apos; s profile|">Profile</blockquote>
-                    <blockquote class="flow-text right" th:text="|Points: | + ${points}">Commitment</blockquote>
+                    <blockquote class="flow-text left" th:text="${otherUser.getUsername()} + |的简介|">Profile</blockquote>
+                    <blockquote class="flow-text right" th:text="|分数: | + ${points}">Commitment</blockquote>
                 </div>
             </header>
             <section class="row">
                 <div class="col s12 m6">
                     <ul class="collection">
-                        <li class="collection-item center">Personal data</li>
+                        <li class="collection-item center">个人简介</li>
                         <li class="collection-item">
                             <span class="badge">
                                 <span th:text="${otherUser.getUsername()}">Nick</span>
@@ -35,26 +35,26 @@
                 </div>
                 <div class="col s12 m6">
                     <ul class="collection">
-                        <li class="collection-item center strong">Activity</li>
+                        <li class="collection-item center strong">活动</li>
                         <li class="collection-item">
                             <a th:href="@{'/topics/user/' + ${otherUser.getId()}+'_'+'1'}" style="display: block; color: #26a69a">
                                 <span class="badge">
                                     <span th:text="${numberOfTopics}"></span>
-                                </span>Topics:
+                                </span>话题:
                             </a>
                         </li>
                         <li class="collection-item">
                             <a th:href="@{'/answers/' + ${otherUser.getId()}}" style="display: block; color: #26a69a">
                                 <span class="badge">
                                     <span th:text="${numberOfAnswers}"></span>
-                                </span>Answers:
+                                </span>回复:
                             </a>
                         </li>
                         <li class="collection-item">
                             <a th:href="@{'/answers/useful/' + ${otherUser.getId()}}" style="display: block; color: #26a69a">
                                 <span class="badge">
                                     <span th:text="${numberOfHelped}"></span>
-                                </span>Helped:
+                                </span>有用:
                             </a>
                         </li>
                     </ul>
@@ -71,10 +71,10 @@
 					<div class="col s12 m6">
 						<div class="card">
 							<div class="card-image">
-								<img th:src="${imgUrl}" width="300" height="400"></img>
+								<img th:src="${imgUrl}" width="300" height="400" />
 							</div>
 							<div class="card-action">
-								<a th:href="${imgUrl}">点击查看大图</a>
+								<a th:href="${imgUrl}">点击查看原图</a>
 							</div>
 						</div>
 					</div>
@@ -92,10 +92,10 @@
 				<div class="file-field input-field">
 					<div class="btn">
 						<span>选择照片</span> 
-						<input type="file" name="file"></input>
+						<input type="file" name="file" />
 					</div>
 					<div class="file-path-wrapper">
-						<input class="file-path validate" type="text"></input>
+						<input class="file-path validate" type="text" />
 					</div>
 				</div>
 				<div class="row">

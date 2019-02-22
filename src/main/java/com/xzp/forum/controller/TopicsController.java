@@ -109,7 +109,7 @@ public class TopicsController {
 			case "other":
 				return "其他";
 			case "all":
-				return "All topics";
+				return "所有话题";
 			default:
 				return "User's topics";
 		}

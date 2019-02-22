@@ -29,12 +29,13 @@ public class RankController {
 	
 	@Autowired
 	private JedisAdapter jedisAdapter;
-	
+
 	private String rankKey="forumRankKey";
-	
+
 	@RequestMapping(path="/rank",method=RequestMethod.GET)
 	public String rankPoint(Model model) {
 		User user=hostHolder.getUser();
+		//创建话题：1分，回复：2分，回复有用：3分
 		Long points = userDao.getPoints(user.getId());
 		jedisAdapter.zadd(rankKey, points, user.getUsername());
 		Set<String> pointSet=jedisAdapter.zrevrange(rankKey, 0, 9);

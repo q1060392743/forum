@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/online">
 <head>
-    <title>Add Topic</title>
+    <title>创建话题</title>
 </head>
 <body>
     <main layout:fragment="content">
@@ -43,14 +43,14 @@
                     </div>
                     <div class="row">
                         <div class="col s12">
-                            <label>Title:
+                            <label>标题：
                                 <input type="text" name="title" maxlength="32" data-length="32" required="required"/>
                             </label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col s12">
-                            <label>Content:
+                            <label>内容：
                             		<textarea name="content" class="materialize-textarea" maxlength="1024" data-length="1024" required="required"></textarea>
                             </label>
                         </div>
@@ -58,8 +58,8 @@
 
 				<div class="row">
                         <div class="col s12">
-                            <label>Code:
-                                <textarea name="code" class="materialize-textarea" placeholder="[optional]"
+                            <label>代码：
+                                <textarea name="code" class="materialize-textarea" placeholder="[可选]"
                                           style="font-family: monospace, monospace;" maxlength="1024" data-length="1024"></textarea>
                             </label>
                         </div>

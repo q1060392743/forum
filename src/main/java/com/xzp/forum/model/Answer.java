@@ -7,7 +7,6 @@ import java.util.Optional;
 /**
  * answer的model实体层
  *
- * @author xiezhiping
  */
 public class Answer {
     private Long id;//评论的answerId

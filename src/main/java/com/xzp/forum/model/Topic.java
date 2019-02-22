@@ -9,7 +9,6 @@ import java.util.Optional;
 
 /**
  * topic的model实体层
- * @author xiezhiping
  *
  */
 public class Topic {

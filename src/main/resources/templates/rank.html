@@ -18,10 +18,10 @@
 				<!--<img src="http://pj9qy0grp.bkt.clouddn.com/private.jpg" alt="" class="circle"/> -->
 				<span class="chip left" style="background-color: #f3f2f2;"> <a class="title" th:text="${pointName}" th:href="@{'/profile/' + ${userDao.getIdByUsername(pointName)}}">pointName</a></span>
 
-				<p th:text="|得分:|+${userDao.getPoints(userDao.getIdByUsername(pointName))}">
+				<p th:text="|得分：|+${userDao.getPoints(userDao.getIdByUsername(pointName))}">
 					point
 				</p> 
-				<p th:text="|个人简介:|+${userDao.getUserByUsername(pointName).getIntroduction()}">
+				<p th:text="|个人简介：|+${userDao.getUserByUsername(pointName).getIntroduction()}">
 					point
 				</p>
 				<a th:href="@{'/profile/' + ${userDao.getIdByUsername(pointName)}}" class="secondary-content">

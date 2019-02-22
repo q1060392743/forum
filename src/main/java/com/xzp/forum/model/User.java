@@ -16,7 +16,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 /**
  * User的model实体层
  * 
- * @author xiezhiping
  *
  */
 public class User implements UserDetails {
