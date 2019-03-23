@@ -51,7 +51,7 @@ public class TopicsController {
 	 */
 	@RequestMapping(path="/topics/{category}/{currentPage}", method=RequestMethod.GET)
 	public String displayTopicPage(@PathVariable String category, @PathVariable int currentPage, Model model) {
-		PageBean<Topic> pageTopic=pageService.findItemByPage(category, currentPage, 10);
+		PageBean<Topic> pageTopic=pageService.findItemByPage(category, currentPage, 5);
 		List<Topic> pageList=pageTopic.getItems();
 		String header = setHeader(category);
 		int topicsTotalNum=topicsService.getTopicsByCategory(category).size();
@@ -74,7 +74,7 @@ public class TopicsController {
 	@RequestMapping(path = "/topics/user/{id}_{currentPage}", method = RequestMethod.GET)
 	public String displayTopicsByUser(@PathVariable String id, @PathVariable int currentPage, Model model) {
 //		List<Topic> topics = topicsService.getTopicsByUser(id);
-		PageBean<Topic> pageTopic=pageService.findItemByUser(id, currentPage, 10);
+		PageBean<Topic> pageTopic=pageService.findItemByUser(id, currentPage, 3);
 		List<Topic> topics=pageTopic.getItems();
 		int topicsTotalNum=topicsService.getTopicsByUser(id).size();
 		String header = setHeader("user");

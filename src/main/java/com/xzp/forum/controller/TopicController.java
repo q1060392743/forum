@@ -4,6 +4,7 @@ import com.xzp.forum.dao.AnswerDao;
 import com.xzp.forum.dao.MessageDao;
 import com.xzp.forum.dao.TopicDao;
 import com.xzp.forum.dao.UserDao;
+import com.xzp.forum.filter.SensitiveWordFilter;
 import com.xzp.forum.model.Answer;
 import com.xzp.forum.model.Topic;
 import com.xzp.forum.model.User;
@@ -36,6 +37,9 @@ public class TopicController {
     private AnswerDao answerDao;
     @Autowired
     private MessageDao messageDao;
+
+    @Autowired
+    private SensitiveWordFilter sensitiveWordFilter;
 
     @RequestMapping(path = "/topic/{id}", method = RequestMethod.GET)
     public String displayTopic(@PathVariable String id, Model model) {
@@ -93,7 +97,8 @@ public class TopicController {
     public View addAnswer(@RequestParam("content") String content, @RequestParam("code") String code,
                           @RequestParam("id_topic") String id_topic, @RequestParam("id_user") String id_user,
                           HttpServletRequest request) {
-
+        content = sensitiveWordFilter.replaceSensitiveWord(content, "*");
+        code = sensitiveWordFilter.replaceSensitiveWord(code, "*");
         topicsService.addAnswer(content, code, id_topic, id_user);
 
         String contextPath = request.getContextPath();

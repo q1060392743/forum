@@ -4,6 +4,7 @@ import com.xzp.forum.dao.AnswerDao;
 import com.xzp.forum.dao.MessageDao;
 import com.xzp.forum.dao.TopicDao;
 import com.xzp.forum.dao.UserDao;
+import com.xzp.forum.filter.SensitiveWordFilter;
 import com.xzp.forum.model.Topic;
 import com.xzp.forum.model.User;
 import com.xzp.forum.util.HostHolder;
@@ -37,6 +38,9 @@ public class AddTopicController {
 
     @Autowired
     private MessageDao messageDao;
+
+    @Autowired
+    private SensitiveWordFilter sensitiveWordFilter;
 
     @Autowired
     private HostHolder hostHolder;
@@ -82,6 +86,9 @@ public class AddTopicController {
     public View addTask(@RequestParam("category") String category, @RequestParam("title") String title,
                         @RequestParam("content") String content, @RequestParam("code") String code,
                         @RequestParam("id_user") String id_user, HttpServletRequest request) {
+        title = sensitiveWordFilter.replaceSensitiveWord(title, "*");
+        content = sensitiveWordFilter.replaceSensitiveWord(content, "*");
+        code = sensitiveWordFilter.replaceSensitiveWord(code, "*");
         Topic topic = new Topic();
         topic.setCategory(category);
         if (Objects.equals(code, "")) {
@@ -89,6 +96,7 @@ public class AddTopicController {
         } else {
             topic.setCode(code);
         }
+
         topic.setContent(content);
         topic.setTitle(title);
         topic.setCreatedDate(new Date());
